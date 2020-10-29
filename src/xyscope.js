@@ -3,13 +3,15 @@ var Scope = function () {
         scale, setLimit, limitsFromString;
 
     scale = function (p, limits, trueSize) {
-        return trueSize / ((p + limits.offset) / limits.size);
+        return trueSize / (
+            limits.size / (p + limits.offset)
+        );
     };
 
     setLimit = function (min, max) {
         return {
             'size': max - min,
-            'offset': min
+            'offset': 0 - min
         }
     };
 
@@ -21,17 +23,18 @@ var Scope = function () {
         'setLimits': function (limits) {
             const [xMin, yMin, xMax, yMax] = limits.split(',');
             limitsX = setLimit(xMin, xMax);
-            limitsY = setLimit(yMin, yMax);
+            // reversed y-axis to get a more "mathematically normal" view.
+            limitsY = setLimit(yMax, yMin);
         },
         'drawLine': function (x1, y1, x2, y2) {
             ctx.beginPath();
             ctx.moveTo(
-                scale(x1, limitsX, htmlCanvas.width),
-                scale(y1, limitsY, htmlCanvas.height)
+                scale(x1, limitsX, canvas.width),
+                scale(y1, limitsY, canvas.height)
             );
             ctx.lineTo(
-                scale(x2, limitsX, htmlCanvas.width),
-                scale(y2, limitsY, htmlCanvas.height)
+                scale(x2, limitsX, canvas.width),
+                scale(y2, limitsY, canvas.height)
             );
             ctx.stroke();
         }
