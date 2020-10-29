@@ -1,7 +1,7 @@
 # XYScope
 
-*[UNFINISHED] vue.js component to display an
-X-Y-Scope for data visualisation.*
+**[UNFINISHED] vue.js component to display an
+X-Y-Scope for data visualisation.**
 
 I'm applying for a job that requires me to have a personal project
 using Vue.js
