@@ -7,7 +7,12 @@
 
 <body>
     <div id="example">
-        <xyscope limits="0, 0, 20, 20"></xyscope>
+        <!--
+            "ref" is only really needed so we can call methods from "out here"
+            once the proper data interface has been defined, we probably won't
+            need a ref any more?????
+        -->
+        <xyscope ref="scope" limits="0, 0, 20, 20"></xyscope>
     </div>
     <script type="text/javascript" src="src/xyscope.js"></script>
 </body>
