@@ -1,9 +1,10 @@
 {
-    "dependencies": {
+    "dependencies": {},
+    "devDependencies": {
+        "jest": "^26.6.1",
         "vue": "^2.6.12"
     },
-    "devDependencies": {},
-    "license": "unlicense",
+    "license": "The Unlicense",
     "private": true,
     "scripts": {}
 }
