@@ -1,2 +1,6 @@
-vue.js
+.bash_history
+.yarnrc
+yarn.lock
 .vscode
+.cache
+node_modules
