@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# use ./docker/build-container to build the container
+
+docker build -t xyscope-dev ./docker
