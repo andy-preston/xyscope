@@ -12,6 +12,6 @@
     "license": "The Unlicense",
     "private": true,
     "scripts": {
-        "build": "webpack"
+        "build": "yarn jest && yarn webpack"
     }
 }
