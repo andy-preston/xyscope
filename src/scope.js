@@ -4,7 +4,7 @@
 module.exports = (buf, scl) => {
     var canvas, ctx;
 
-    const buffer = typeof buf == 'undefined' ? require('./buffer')(100) : buf;
+    const buffer = typeof buf == 'undefined' ? require('./buffer')(600) : buf;
     const scaler = typeof scl == 'undefined' ? require('./scaler')() : scl;
 
     return {

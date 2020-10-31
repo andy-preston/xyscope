@@ -41,10 +41,3 @@ Vue.component('xyscope', {
     }
 
 });
-
-var vm = new Vue({ 'el': '#example' });
-
-setTimeout(function () {
-    vm.$refs.scope.drawLine(5, 5, 15, 15);
-}, 5000);
-
