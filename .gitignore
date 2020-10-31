@@ -5,3 +5,5 @@ yarn.lock
 .vscode
 .cache
 node_modules
+build/*
+!build/.gitkeep
