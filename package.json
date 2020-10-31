@@ -1,10 +1,17 @@
 {
     "dependencies": {},
     "devDependencies": {
+        "babel-core": "^6.26.3",
+        "babel-loader": "^8.1.0",
+        "babel-preset-env": "^1.7.0",
         "jest": "^26.6.1",
-        "vue": "^2.6.12"
+        "vue": "^2.6.12",
+        "webpack-cli": "^4.1.0",
+        "webpack": "^5.3.2"
     },
     "license": "The Unlicense",
     "private": true,
-    "scripts": {}
+    "scripts": {
+        "build": "webpack"
+    }
 }
