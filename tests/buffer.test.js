@@ -31,7 +31,6 @@ test('pushed element is always at top of buffer, followed by others in order', f
             if (expected < 0) {
                 expected = 0;
             }
-            console.warn(j, expected);
             expect(elements[j]).toEqual([expected, expected]);
         }
     };
