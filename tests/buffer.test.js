@@ -1,37 +1,48 @@
 const buffer = require('../src/buffer');
 
-test('buffer is correct size and contains zeroed elements', function () {
-    [10, 20, 30].forEach(function (size) {
-        const elements = buffer(size).elements();
-
-        expect(elements.length).toBe(size);
+test('buffer is correct size and contains zeroed elements', () => {
+    [10, 20, 30].forEach((size) => {
+        const testBuffer = buffer(size);
+        expect(testBuffer.size()).toBe(size);
         // If an element is "undefined" forEach will not "see" it.
-        for (let i = 0; i < size; i++) {
-            expect(elements[i]).toEqual([0, 0]);
+        for (let idx = 0; idx < size; idx++) {
+            let element = testBuffer.element(idx);
+            expect(element.x).toBe(0);
+            expect(element.y).toBe(0);
         }
     });
 });
 
-test("pushing an element doesn't change the size of the buffer", function () {
+test("can't request an item beyond end of buffer", () => {
     const testBuffer = buffer(5);
-    for (let i = 1; i <= 10; i++) {
-        testBuffer.push(i, i);
-        expect(testBuffer.elements().length).toBe(5);
-    };
+    expect(() => {
+        testBuffer.element(6);
+    }).toThrow();
+    expect(() => {
+        testBuffer.element(-1);
+    }).toThrow();
 });
 
-test('pushed element is always at top of buffer, followed by others in order', function () {
-    var elements, expected;
+test('pushed element is always first in buffer, followed by others in push order', () => {
     const testBuffer = buffer(5);
-    for (let i = 1; i <= 10; i++) {
-        testBuffer.push(i, i);
-        elements = testBuffer.elements();
-        for (let j = 0; j < 5; j++) {
-            expected = i - j;
+    for (let item = 1; item <= 10; item++) {
+        testBuffer.push(item, item);
+        for (let idx = 0; idx < 5; idx++) {
+            let expected = item - idx;
             if (expected < 0) {
                 expected = 0;
             }
-            expect(elements[j]).toEqual([expected, expected]);
+            let actual = testBuffer.element(idx);
+            expect(actual.x).toBe(expected);
+            expect(actual.y).toBe(expected);
         }
     };
+});
+
+test('pushed element comes out in the order it went in', () => {
+    const testBuffer = buffer(5);
+    testBuffer.push(4, 5);
+    const actual = testBuffer.element(0);
+    expect(actual.x).toBe(4);
+    expect(actual.y).toBe(5);
 });

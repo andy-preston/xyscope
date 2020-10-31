@@ -1,18 +1,27 @@
-module.exports = function (size) {
-    var head = size;
-    const buffer = new Array(size).fill([0, 0]);
+module.exports = (size) => {
+    const bufSize = size * 2;
+    var head = bufSize;
+    const buffer = new Array(bufSize).fill(0);
 
     return {
-        'push': function (x, y) {
+        'push': (x, y) => {
             if (head == 0) {
-                head = size;
+                head = bufSize;
             }
             head = head - 1;
-            buffer[head] = [x, y];
+            buffer[head] = y;
+            head = head - 1;
+            buffer[head] = x;
         },
-        'elements': function () {
-            return buffer.slice(head).concat(
-                buffer.slice(0, head));
+        'size': () => {
+            return buffer.length / 2;
+        },
+        'element': (idx) => {
+            if (idx < 0 || idx >= size) {
+                throw ('index out of range');
+            }
+            const internalIdx = (head + (2 * idx)) % bufSize;
+            return { 'x': buffer[internalIdx], 'y': buffer[internalIdx + 1] };
         }
     };
 }
