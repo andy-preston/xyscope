@@ -27,15 +27,14 @@ test('pushed element is always first in buffer, followed by others in push order
     const testBuffer = buffer(5);
     for (let item = 1; item <= 10; item++) {
         testBuffer.push(item, item);
-        for (let idx = 0; idx < 5; idx++) {
+        testBuffer.forEach((idx, actual) => {
             let expected = item - idx;
             if (expected < 0) {
                 expected = 0;
             }
-            let actual = testBuffer.element(idx);
             expect(actual.x).toBe(expected);
             expect(actual.y).toBe(expected);
-        }
+        });
     };
 });
 
