@@ -1,20 +1,28 @@
-module.exports = () => {
+// You only need to pass anything to this "constructor" in the test environment
+// During normal usage, don't pass anything and it'll work out it's own
+// dependencies
+module.exports = (buf, scl) => {
     var canvas, ctx;
-    const buffer = require('./buffer')(100);
-    const scaler = require('./scaler')();
+
+    const buffer = typeof buf == 'undefined' ? require('./buffer')(100) : buf;
+    const scaler = typeof scl == 'undefined' ? require('./scaler')() : scl;
 
     return {
+
         'bindCanvas': (htmlCanvas) => {
             canvas = htmlCanvas;
             ctx = canvas.getContext('2d');
         },
-        'setLimits': (limits) => {
-            const [xMin, yMin, xMax, yMax] = limits.split(',');
+
+        'setLimits': (limitStr) => {
+            const [xMin, yMin, xMax, yMax] = limitStr.split(',').map(x => +x);
             scaler.setLimits(xMin, yMin, xMax, yMax);
         },
-        'validateLimits': (limits) => {
+
+        'validateLimits': (limitStr) => {
+            const limits = limitStr.split(',');
             if (limits.length != 4 || limits.some(isNaN)) {
-                console.warn(
+                console.log(
                     limits,
                     'limits should be 4 numerics separated by commas'
                 );
@@ -22,6 +30,7 @@ module.exports = () => {
             }
             return true;
         },
+
         'drawLine': (x1, y1, x2, y2) => {
             ctx.beginPath();
             ctx.moveTo(

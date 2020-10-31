@@ -7,7 +7,7 @@ Vue.component('xyscope', {
             'type': String,
             'required': true,
             'validator': (value) => {
-                return this.scope.validateLimits(value.split(','));
+                return this.scope.validateLimits(value);
             }
         }
     },
