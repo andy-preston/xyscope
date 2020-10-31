@@ -31,16 +31,21 @@ module.exports = (buf, scl) => {
             return true;
         },
 
-        'drawLine': (x1, y1, x2, y2) => {
+        'push': (x, y) => {
+            buffer.push(x, y);
+
+            // This needs to by async
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
-            ctx.moveTo(
-                scaler.scale(x1, 'x', canvas.width),
-                scaler.scale(y1, 'y', canvas.height)
-            );
-            ctx.lineTo(
-                scaler.scale(x2, 'x', canvas.width),
-                scaler.scale(y2, 'y', canvas.height)
-            );
+            buffer.forEach((idx, element) => {
+                const scaledX = scaler.scale(element.x, 'x', canvas.width);
+                const scaledY = scaler.scale(element.y, 'y', canvas.height);
+                if (idx == 0) {
+                    ctx.moveTo(scaledX, scaledY);
+                } else {
+                    ctx.lineTo(scaledX, scaledY);
+                }
+            });
             ctx.stroke();
         }
     };

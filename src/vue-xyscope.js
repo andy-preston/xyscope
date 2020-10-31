@@ -24,13 +24,8 @@ Vue.component('xyscope', {
         }
     },
     'methods': {
-        // This isn't going to be JUST draw-a-line for long.
-        // For it to work like a real X-Y scope (which is what I want)
-        // we're going to need some better method of injecting data
-        // that data  will then persist for a while and then fade from
-        // the display.
-        'drawLine': (x1, y1, x2, y2) => {
-            this.scope.drawLine(x1, y1, x2, y2);
+        'push': (x, y) => {
+            this.scope.push(x, y);
         }
     },
     'beforeCreate': () => {
