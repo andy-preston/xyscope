@@ -1,4 +1,5 @@
 .bash_history
+.node_repl_history
 .yarnrc
 yarn.lock
 .vscode
