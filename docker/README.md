@@ -18,4 +18,3 @@ To get an extra bash prompt inside the container:
 ```bash
 ./docker/container-bash
 ```
-```
