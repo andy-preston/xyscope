@@ -1,3 +1,7 @@
+/* global require */
+/* global expect */
+/* global test */
+
 const buffer = require('../src/buffer');
 
 test('buffer is correct size and contains zeroed elements', () => {
@@ -26,7 +30,7 @@ test("can't request an item beyond end of buffer", () => {
 test('pushed element is always first in buffer, followed by others in push order', () => {
     const testBuffer = buffer(5);
     for (let item = 1; item <= 10; item++) {
-        testBuffer.push(item, item);
+        testBuffer.push({ 'x': item, 'y': item });
         testBuffer.forEach((idx, actual) => {
             let expected = item - idx;
             if (expected < 0) {
@@ -35,12 +39,12 @@ test('pushed element is always first in buffer, followed by others in push order
             expect(actual.x).toBe(expected);
             expect(actual.y).toBe(expected);
         });
-    };
+    }
 });
 
 test('pushed element comes out in the order it went in', () => {
     const testBuffer = buffer(5);
-    testBuffer.push(4, 5);
+    testBuffer.push({ 'x': 4, 'y': 5 });
     const actual = testBuffer.element(0);
     expect(actual.x).toBe(4);
     expect(actual.y).toBe(5);

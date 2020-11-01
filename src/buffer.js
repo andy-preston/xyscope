@@ -1,3 +1,5 @@
+/* global module */
+
 module.exports = (size) => {
     const bufSize = size * 2;
     var head = bufSize;
@@ -12,14 +14,14 @@ module.exports = (size) => {
     }
 
     return {
-        'push': (x, y) => {
+        'push': (pair) => {
             if (head == 0) {
                 head = bufSize;
             }
             head = head - 1;
-            buffer[head] = y;
+            buffer[head] = pair.y;
             head = head - 1;
-            buffer[head] = x;
+            buffer[head] = pair.x;
         },
         'size': () => {
             return buffer.length / 2;
