@@ -1,3 +1,7 @@
+/* global require */
+/* global Vue */
+/* global window */
+
 require('../src/vue-xyscope');
 
 (() => {
@@ -13,7 +17,7 @@ require('../src/vue-xyscope');
     const dt = 0.015;
 
     const point = (time) => {
-        setTimeout(function () {
+        window.setTimeout(function () {
             const newX = x + dt * (sigma * (y - x));
             const newY = y + dt * (x * (rho - z) - y);
             const newZ = z + dt * (x * y - beta * z);
