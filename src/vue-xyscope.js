@@ -1,3 +1,5 @@
+/* global Vue */
+
 Vue.component('xyscope', {
     'template': '<div class="xyscope">' +
         '<canvas id="canvas" style="width: 100%; height: 100%"></canvas>' +
@@ -18,6 +20,7 @@ Vue.component('xyscope', {
     'watch': {
         'limits': {
             'immediate': true,
+            // eslint-disable-next-line no-unused-vars
             'handler': (val, oldVal) => {
                 this.scope.setLimits(val);
             }

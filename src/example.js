@@ -1,6 +1,4 @@
-/* global require */
 /* global Vue */
-/* global window */
 
 require('../src/vue-xyscope');
 

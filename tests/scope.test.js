@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 const scope = require('../src/scope');
 
 const mockScaler = () => {

@@ -1,5 +1,3 @@
-/* global module */
-
 module.exports = (size) => {
     const bufSize = size * 2;
     var head = bufSize;

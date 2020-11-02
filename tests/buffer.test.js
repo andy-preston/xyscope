@@ -1,6 +1,4 @@
-/* global require */
-/* global expect */
-/* global test */
+/* eslint-env jest */
 
 const buffer = require('../src/buffer');
 
