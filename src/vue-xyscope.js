@@ -30,8 +30,8 @@
             }
         },
         'methods': {
-            'push': (x, y) => {
-                scope.push(x, y);
+            'pushData': (data) => {
+                scope.pushData(data);
             }
         },
         'mounted': () => {
