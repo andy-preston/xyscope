@@ -80,7 +80,10 @@ module.exports = (buf, scl) => {
         'start': (htmlCanvas) => {
             canvas = htmlCanvas;
             ctx = canvas.getContext('2d');
-            ctx.lineWidth = 0.3;
+            // TODO: This'll need to be calculated during the scaling
+            ctx.lineWidth = 0.4;
+            ctx.strokeStyle = 'green';
+            canvas.style.background = 'black';
             requestRepaint();
         },
 
