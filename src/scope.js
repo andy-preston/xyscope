@@ -33,6 +33,11 @@ module.exports = (buf, scl) => {
     const scaler = typeof scl == 'undefined' ? Scaler() : scl;
 
     /**
+     * @constant requestDataEvent event to request data
+     */
+    const requestDataEvent = new Event('request-data');
+
+    /**
      * @function requestRepaint request that browser updates canvas next repaint
      */
     const requestRepaint = () => {
@@ -55,6 +60,7 @@ module.exports = (buf, scl) => {
                 }
                 );
                 ctx.stroke();
+                canvas.dispatchEvent(requestDataEvent);
             }
         );
     };
