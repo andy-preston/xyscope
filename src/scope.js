@@ -31,8 +31,35 @@ module.exports = (buf, scl) => {
      * @constant {object} scaler object constructed by ./scaler.js or a mock
      */
     const scaler = typeof scl == 'undefined' ? Scaler() : scl;
-    return {
 
+    /**
+     * @function requestRepaint request that browser updates canvas next repaint
+     */
+    const requestRepaint = () => {
+        window.requestAnimationFrame(
+            /**
+             * @function
+             * @param {number} timestamp DOMHighResTimeStamp
+             */
+            (timestamp) => { // eslint-disable-line no-unused-vars
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.beginPath();
+                buffer.forEach((idx, element) => {
+                    const scaledX = scaler.scale(element.x, 'x', canvas.width);
+                    const scaledY = scaler.scale(element.y, 'y', canvas.height);
+                    if (idx == 0) {
+                        ctx.moveTo(scaledX, scaledY);
+                    } else {
+                        ctx.lineTo(scaledX, scaledY);
+                    }
+                }
+                );
+                ctx.stroke();
+            }
+        );
+    };
+
+    return {
         /**
          * @function start start the process
          * @param {object} htmlCanvas the canvas to draw on
@@ -40,6 +67,7 @@ module.exports = (buf, scl) => {
         'start': (htmlCanvas) => {
             canvas = htmlCanvas;
             ctx = canvas.getContext('2d');
+            requestRepaint();
         },
 
         /**
@@ -68,22 +96,13 @@ module.exports = (buf, scl) => {
             return true;
         },
 
-        'push': (x, y) => {
-            buffer.push(x, y);
-
-            // This needs to by async
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.beginPath();
-            buffer.forEach((idx, element) => {
-                const scaledX = scaler.scale(element.x, 'x', canvas.width);
-                const scaledY = scaler.scale(element.y, 'y', canvas.height);
-                if (idx == 0) {
-                    ctx.moveTo(scaledX, scaledY);
-                } else {
-                    ctx.lineTo(scaledX, scaledY);
-                }
-            });
-            ctx.stroke();
+        /**
+         * @function pushData respond to a requestDataEvent
+         * @param {object} data the x,y pair (``{'x': 23, 'y': 42}``)
+         */
+        'pushData': (data) => {
+            buffer.push(data);
+            requestRepaint();
         }
     };
 };
