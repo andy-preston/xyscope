@@ -35,7 +35,7 @@
             }
         },
         'mounted': () => {
-            scope.bindCanvas(document.getElementById('canvas'));
+            scope.start(document.getElementById('canvas'));
         }
 
     });
