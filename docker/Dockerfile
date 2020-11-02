@@ -10,7 +10,7 @@ RUN apt-get update
 
 RUN apt-get -y --no-install-recommends install gnupg curl ca-certificates
 
-RUN echo "deb https://deb.nodesource.com/node_10.x bionic main" \
+RUN echo "deb https://deb.nodesource.com/node_15.x bionic main" \
     > /etc/apt/sources.list.d/nodesource.list
 
 RUN curl -sS https://deb.nodesource.com/gpgkey/nodesource.gpg.key | \
