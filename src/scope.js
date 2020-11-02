@@ -1,3 +1,5 @@
+const Buffer = require('./buffer');
+const Scaler = require('./scaler');
 
 /**
  * An object to display an x-y vectorscope on an HTML canvas
@@ -19,9 +21,16 @@ module.exports = (buf, scl) => {
      * @member {object} ctx the device context of the canvas
      */
     var ctx;
-    const buffer = typeof buf == 'undefined' ? require('./buffer')(600) : buf;
-    const scaler = typeof scl == 'undefined' ? require('./scaler')() : scl;
 
+    /**
+     * @constant {object} buffer object constructed by ./buffer.js or a mock
+     */
+    const buffer = typeof buf == 'undefined' ? Buffer(600) : buf;
+
+    /**
+     * @constant {object} scaler object constructed by ./scaler.js or a mock
+     */
+    const scaler = typeof scl == 'undefined' ? Scaler() : scl;
     return {
 
         'bindCanvas': (htmlCanvas) => {
