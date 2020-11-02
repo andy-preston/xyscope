@@ -1,4 +1,12 @@
+/**
+ * @function Buffer function constructor for the circular buffer object
+ * @param {number} size the number of items the buffer should hold
+ */
 const Buffer = require('./buffer');
+
+/**
+ * @function Scaler function constructor for scaler object
+ */
 const Scaler = require('./scaler');
 
 /**
