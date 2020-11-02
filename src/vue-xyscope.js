@@ -19,10 +19,6 @@
                 }
             }
         },
-        'data': () => {
-            return {
-            }
-        },
         'watch': {
             'limits': {
                 'immediate': true,
