@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-const scope = require('../src/scope');
+const Scope = require('../src/scope');
 
 const mockScaler = () => {
     var xMin, yMin, xMax, yMax;
@@ -19,10 +19,10 @@ const mockScaler = () => {
 
 test('setLimits passes data as expected', () => {
     const scaler = mockScaler();
-    const testScope = scope(undefined, scaler);
+    const scope = Scope(undefined, scaler);
     ['1,2,3,4', '1, 2, 3, 4'].forEach((limitString) => {
-        testScope.setLimits('1,2,3,4');
-        actual = scaler.checkLimits();
+        scope.setLimits(limitString);
+        const actual = scaler.checkLimits();
         expect(actual.xMin).toBe(1);
         expect(actual.yMin).toBe(2);
         expect(actual.xMax).toBe(3);
@@ -31,13 +31,13 @@ test('setLimits passes data as expected', () => {
 });
 
 test('validateLimits allows ONLY a string with 4 numerics', () => {
-    const testScope = scope();
-    expect(testScope.validateLimits('1,2,3,4')).toBe(true);
-    expect(testScope.validateLimits(' 1, 2, 3, 4 ')).toBe(true);
-    expect(testScope.validateLimits(' 1, 2, 3')).toBe(false);
-    expect(testScope.validateLimits(' 1, 2, 3,4,5')).toBe(false);
-    expect(testScope.validateLimits('not,even,numbers,here')).toBe(false);
-    expect(testScope.validateLimits('not even a list')).toBe(false);
+    const scope = Scope();
+    expect(scope.validateLimits('1,2,3,4')).toBe(true);
+    expect(scope.validateLimits(' 1, 2, 3, 4 ')).toBe(true);
+    expect(scope.validateLimits(' 1, 2, 3')).toBe(false);
+    expect(scope.validateLimits(' 1, 2, 3,4,5')).toBe(false);
+    expect(scope.validateLimits('not,even,numbers,here')).toBe(false);
+    expect(scope.validateLimits('not even a list')).toBe(false);
 });
 
 //////////////////////////////////////////////////////////////////
