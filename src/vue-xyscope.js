@@ -1,6 +1,9 @@
 /* global Vue */
 
 (() => {
+    /**
+     * @constant scope an instance of the scope object
+     */
     const scope = require('../src/scope')();
 
     Vue.component('xyscope', {
