@@ -42,11 +42,20 @@ module.exports = (buf, scl) => {
             ctx = canvas.getContext('2d');
         },
 
+        /**
+         * @function setLimits call this before `start` to set up axes
+         * @param {string} limitStr "xMin, yMin, xMax, yMax"
+         */
         'setLimits': (limitStr) => {
             const [xMin, yMin, xMax, yMax] = limitStr.split(',').map(x => +x);
             scaler.setLimits(xMin, yMin, xMax, yMax);
         },
 
+        /**
+         * @function validateLimits validate a string for `setLimits`
+         * @param {string} limitStr "xMin, yMin, xMax, yMax"
+         * @returns {boolean} true = validated, false = invalid
+         */
         'validateLimits': (limitStr) => {
             const limits = limitStr.split(',');
             if (limits.length != 4 || limits.some(isNaN)) {
