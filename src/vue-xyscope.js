@@ -15,9 +15,7 @@
             'limits': {
                 'type': String,
                 'required': true,
-                'validator': (value) => {
-                    return scope.validateLimits(value);
-                }
+                'validator': scope.validateLimits
             }
         },
         'watch': {
@@ -40,9 +38,7 @@
              * @function pushData
              * @param {object} data the x,y pair (``{'x': 23, 'y': 42}``)
              */
-            'pushData': (data) => {
-                scope.pushData(data);
-            }
+            'pushData': scope.pushData
         },
         'mounted': () => {
             scope.start(document.getElementById('canvas'));
