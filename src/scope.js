@@ -1,9 +1,24 @@
-// You only need to pass anything to this "constructor" in the test environment
-// During normal usage, don't pass anything and it'll work out it's own
-// dependencies
-module.exports = (buf, scl) => {
-    var canvas, ctx;
 
+/**
+ * An object to display an x-y vectorscope on an HTML canvas
+ * This is a functional constructor, no "new" is required
+ * (e.g. `const scope = require('scope')();`)
+ *
+ * @function Scope
+ * @param {object} buf no need to pass a buffer object unless it's a test mock
+ * @param {object} scl no need to pass a scaler object unless it's a test mock
+ * @returns {object} the scope object constructed
+ */
+module.exports = (buf, scl) => {
+    /**
+     * @member {object} canvas an HTMLCanvas to render to
+     */
+    var canvas;
+
+    /**
+     * @member {object} ctx the device context of the canvas
+     */
+    var ctx;
     const buffer = typeof buf == 'undefined' ? require('./buffer')(600) : buf;
     const scaler = typeof scl == 'undefined' ? require('./scaler')() : scl;
 
