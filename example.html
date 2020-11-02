@@ -12,7 +12,7 @@
             once the proper data interface has been defined, we probably won't
             need a ref any more?????
         -->
-        <xyscope ref="scope" limits="-40, -5, 40, 60"></xyscope>
+        <xyscope ref="scope" limits="-40, -5, 40, 60" v-on:request-data="requestData"></xyscope>
     </div>
     <script type="text/javascript" src="./build/vue-xyscope.js"></script>
 </body>

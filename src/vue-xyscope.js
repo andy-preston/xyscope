@@ -5,8 +5,9 @@
 
     Vue.component('xyscope', {
         'template': '<div class="xyscope">' +
-            '<canvas id="canvas" style="width: 100%; height: 100%"></canvas>' +
-            '</div>',
+            '<canvas id="canvas" style="width: 100%; height: 100%"' +
+            " v-on:request-data=\"$emit('request-data')\"> " +
+            '</canvas></div>',
         'props': {
             /**
              * @member {string} limits "xMin, yMin, xMax, yMax"
