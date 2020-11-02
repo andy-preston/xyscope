@@ -1,7 +1,5 @@
 /* global Vue */
 
-require('../src/vue-xyscope');
-
 (() => {
     var x = 2.0;
     var y = 3.0;

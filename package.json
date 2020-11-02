@@ -30,6 +30,6 @@
         ]
     },
     "scripts": {
-        "build": "yarn eslint src tests && yarn jest && yarn webpack"
+        "build": "yarn eslint src tests example && yarn jest && yarn webpack"
     }
 }

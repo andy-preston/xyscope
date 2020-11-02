@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    'entry': './src/example.js',
+    'entry': './src/vue-xyscope.js',
     'mode': 'development',
     'output': {
         'filename': 'vue-xyscope.js',
