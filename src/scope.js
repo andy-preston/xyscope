@@ -55,18 +55,17 @@ module.exports = (buf, scl) => {
              * @param {number} timestamp DOMHighResTimeStamp
              */
             (timestamp) => { // eslint-disable-line no-unused-vars
+                ctx.setTransform(1, 0, 0, 1, 0, 0);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+                scaler.scale(canvas, ctx);
                 ctx.beginPath();
                 buffer.forEach((idx, element) => {
-                    const scaledX = scaler.scale(element.x, 'x', canvas.width);
-                    const scaledY = scaler.scale(element.y, 'y', canvas.height);
                     if (idx == 0) {
-                        ctx.moveTo(scaledX, scaledY);
+                        ctx.moveTo(element.x, element.y);
                     } else {
-                        ctx.lineTo(scaledX, scaledY);
+                        ctx.lineTo(element.x, element.y);
                     }
-                }
-                );
+                });
                 ctx.stroke();
                 canvas.dispatchEvent(requestDataEvent);
             }
@@ -81,6 +80,7 @@ module.exports = (buf, scl) => {
         'start': (htmlCanvas) => {
             canvas = htmlCanvas;
             ctx = canvas.getContext('2d');
+            ctx.lineWidth = 0.3;
             requestRepaint();
         },
 

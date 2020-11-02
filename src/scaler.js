@@ -21,16 +21,16 @@ module.exports = () => {
 
     return {
         /**
-         * @function scale scale a position on an axis (use setLimits first)
-         * @param {number} p the value to scale
-         * @param {string} axis 'x' or 'y'
-         * @param {number} trueSize the screen size of the axis in pixels
-         * @returns {number} the scaled value
+         * @function scale rescale the canvas before drawing
+         * @param {object} canvas the canvas we're scaling
+         * @param {object} ctx the rendering context we're using
          */
-        'scale': (p, axis, trueSize) => {
-            return trueSize / (
-                limits[axis].size / (p + limits[axis].offset)
+        'scale': (canvas, ctx) => {
+            ctx.scale(
+                canvas.width / limits.x.size,
+                canvas.height / limits.y.size
             );
+            ctx.translate(limits.x.offset, limits.y.offset);
         },
 
         /**
