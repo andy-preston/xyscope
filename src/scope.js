@@ -33,7 +33,11 @@ module.exports = (buf, scl) => {
     const scaler = typeof scl == 'undefined' ? Scaler() : scl;
     return {
 
-        'bindCanvas': (htmlCanvas) => {
+        /**
+         * @function start start the process
+         * @param {object} htmlCanvas the canvas to draw on
+         */
+        'start': (htmlCanvas) => {
             canvas = htmlCanvas;
             ctx = canvas.getContext('2d');
         },
