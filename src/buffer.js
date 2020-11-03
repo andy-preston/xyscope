@@ -3,13 +3,13 @@
  * the head of the buffer, it "falls off" the tail.
  * Data consists of x, y coordinate pairs.
  * This is a functional constructor, no "new" is required
- * (e.g. `const aBuffer = require('buffer')(10);`)
+ * (e.g. `const buffer = Buffer(10);`)
  *
  * @function
  * @param {number} size an integer indicating the number of pairs to store
  * @returns {object} an initialised buffer object
  */
-module.exports = (size) => {
+export const Buffer = (size) => {
     /**
      * @constant {number} bufSize the actual length of the buffer array
      */

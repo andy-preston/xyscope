@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-const Colour = require('../src/colour');
+import { Colour } from '../src/colour.js';
 
 /**
  * @param {string} background CSS colour string

@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-const Scope = require('../src/scope');
+import { Scope } from '../src/scope.js';
 
 const mockScaler = () => {
     var xMin, yMin, xMax, yMax;

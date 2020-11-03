@@ -4,7 +4,7 @@ import { fromString, fromRgba } from 'css-color-converter';
  * @function
  * @returns {object} an initialised color manager object
  */
-module.exports = () => {
+export const Colour = () => {
     /** @member {Array} nextColour an RGBA array of the next colour */
     var nextColour;
 

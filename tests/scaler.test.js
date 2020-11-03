@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-const Scaler = require('../src/scaler');
+import { Scaler } from '../src/scaler.js';
 
 test('scales correctly with positive coordinates', () => {
     const scaler = Scaler();

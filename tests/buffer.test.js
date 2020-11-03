@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-const Buffer = require('../src/buffer');
+import { Buffer } from '../src/buffer.js';
 
 test('buffer is correct size and contains zeroed elements', () => {
     [10, 20, 30].forEach((size) => {

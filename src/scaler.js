@@ -2,12 +2,12 @@
  * An object to scale our required axis range to fit the canvas.
  * TODO: can this be done through the canvas API?
  * This is a functional constructor, no "new" is required
- * (e.g. `const scaler = require('scaler')();`)
+ * (e.g. `const scaler = Scaler();`)
  *
  * @function Scaler
  * @returns {object} an initialised scaler object
  */
-module.exports = () => {
+export const Scaler = () => {
     /**
      * A pair of limits for each axis
      * Each limit will be an object with members 'size' and 'offset'
