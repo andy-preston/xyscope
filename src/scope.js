@@ -1,25 +1,19 @@
-/**
- * @function Buffer function constructor for the circular buffer object
- * @param {number} size the number of items the buffer should hold
- */
-const Buffer = require('./buffer');
-
-/**
- * @function Scaler function constructor for scaler object
- */
-const Scaler = require('./scaler');
+import { Buffer } from './buffer.js';
+import { Colour } from './colour.js';
+import { Scaler } from './scaler.js';
 
 /**
  * An object to display an x-y vectorscope on an HTML canvas
  * This is a functional constructor, no "new" is required
- * (e.g. `const scope = require('scope')();`)
+ * (e.g. `const scope = Scope();`)
  *
  * @function Scope
  * @param {object} buf no need to pass a buffer object unless it's a test mock
  * @param {object} scl no need to pass a scaler object unless it's a test mock
+ * @param {object} col no need to pass a colour manager unless it's a test mock
  * @returns {object} the scope object constructed
  */
-module.exports = (buf, scl) => {
+export const Scope = (buf, scl, col) => {
     /**
      * @member {object} canvas an HTMLCanvas to render to
      */
@@ -31,11 +25,6 @@ module.exports = (buf, scl) => {
     var ctx;
 
     /**
-     * @member {CSSStyleDeclaration} style computed style of the canvas
-     */
-    var style;
-
-    /**
      * @constant {object} buffer object constructed by ./buffer.js or a mock
      */
     const buffer = typeof buf == 'undefined' ? Buffer(600) : buf;
@@ -44,6 +33,11 @@ module.exports = (buf, scl) => {
      * @constant {object} scaler object constructed by ./scaler.js or a mock
      */
     const scaler = typeof scl == 'undefined' ? Scaler() : scl;
+
+    /**
+     * @constant {object} color object constructed by ./colour.js or a mock
+     */
+    const colour = typeof col == 'undefined' ? Colour() : col;
 
     /**
      * @constant requestDataEvent event to request data
@@ -63,9 +57,14 @@ module.exports = (buf, scl) => {
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 scaler.scale(canvas, ctx);
-                ctx.strokeStyle = style.getPropertyValue('color');
+                colour.start(
+                    window.getComputedStyle(canvas),
+                    buffer.size
+                );
                 ctx.beginPath();
                 buffer.forEach((idx, element) => {
+                    ctx.strokeStyle = '#fff';
+                    console.log(colour.style());
                     if (idx == 0) {
                         ctx.moveTo(element.x, element.y);
                     } else {
@@ -86,7 +85,6 @@ module.exports = (buf, scl) => {
         'start': (htmlCanvas) => {
             canvas = htmlCanvas;
             ctx = canvas.getContext('2d');
-            style = window.getComputedStyle(canvas);
             requestRepaint();
         },
 
