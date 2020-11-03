@@ -30,18 +30,36 @@ test('setLimits passes data as expected', () => {
     });
 });
 
-test('validateLimits allows ONLY a string with 4 numerics', () => {
+test('validateLimits returns true on any string of 4 numerics', () => {
     const scope = Scope();
     expect(scope.validateLimits('1,2,3,4')).toBe(true);
     expect(scope.validateLimits(' 1, 2, 3, 4 ')).toBe(true);
-    expect(scope.validateLimits(' 1, 2, 3')).toBe(false);
-    expect(scope.validateLimits(' 1, 2, 3,4,5')).toBe(false);
-    expect(scope.validateLimits('not,even,numbers,here')).toBe(false);
-    expect(scope.validateLimits('not even a list')).toBe(false);
 });
 
-//////////////////////////////////////////////////////////////////
-//                                                              //
-// I don't think there's any value in trying to test bindCanvas //
-//                                                              //
-//////////////////////////////////////////////////////////////////
+test('validateLimits fails on less than 4 numerics', () => {
+    const scope = Scope();
+    jest.spyOn(console, 'warn').mockImplementation(() => { });
+    expect(scope.validateLimits(' 1, 2, 3')).toBe(false);
+    expect(console.warn).toHaveBeenCalled();
+});
+
+test('validateLimits fails on more than 4 numerics', () => {
+    const scope = Scope();
+    jest.spyOn(console, 'warn').mockImplementation(() => { });
+    expect(scope.validateLimits(' 1, 2, 3,4,5')).toBe(false);
+    expect(console.warn).toHaveBeenCalled();
+});
+
+test('validateLimits fails on no numerics', () => {
+    const scope = Scope();
+    jest.spyOn(console, 'warn').mockImplementation(() => { });
+    expect(scope.validateLimits('not,even,numbers,here')).toBe(false);
+    expect(console.warn).toHaveBeenCalled();
+});
+
+test('validateLimits fails on plain old bad string', () => {
+    const scope = Scope();
+    jest.spyOn(console, 'warn').mockImplementation(() => { });
+    expect(scope.validateLimits('not even a list')).toBe(false);
+    expect(console.warn).toHaveBeenCalled();
+});
