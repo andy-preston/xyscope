@@ -63,8 +63,6 @@ module.exports = (buf, scl) => {
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 scaler.scale(canvas, ctx);
-                // TODO: lineWidth should be dynamically calculated based on scale
-                ctx.lineWidth = 0.4;
                 ctx.strokeStyle = style.getPropertyValue('color');
                 ctx.beginPath();
                 buffer.forEach((idx, element) => {

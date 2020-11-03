@@ -31,6 +31,8 @@ module.exports = () => {
                 canvas.height / limits.y.size
             );
             ctx.translate(limits.x.offset, limits.y.offset);
+            // TODO: lineWidth should be dynamically calculated based on scale
+            ctx.lineWidth = 0.4;
         },
 
         /**
