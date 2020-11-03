@@ -31,6 +31,11 @@ module.exports = (buf, scl) => {
     var ctx;
 
     /**
+     * @member {CSSStyleDeclaration} style computed style of the canvas
+     */
+    var style;
+
+    /**
      * @constant {object} buffer object constructed by ./buffer.js or a mock
      */
     const buffer = typeof buf == 'undefined' ? Buffer(600) : buf;
@@ -58,6 +63,9 @@ module.exports = (buf, scl) => {
                 ctx.setTransform(1, 0, 0, 1, 0, 0);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 scaler.scale(canvas, ctx);
+                // TODO: lineWidth should be dynamically calculated based on scale
+                ctx.lineWidth = 0.4;
+                ctx.strokeStyle = style.getPropertyValue('color');
                 ctx.beginPath();
                 buffer.forEach((idx, element) => {
                     if (idx == 0) {
@@ -80,10 +88,7 @@ module.exports = (buf, scl) => {
         'start': (htmlCanvas) => {
             canvas = htmlCanvas;
             ctx = canvas.getContext('2d');
-            // TODO: This'll need to be calculated during the scaling
-            ctx.lineWidth = 0.4;
-            ctx.strokeStyle = 'green';
-            canvas.style.background = 'black';
+            style = window.getComputedStyle(canvas);
             requestRepaint();
         },
 
