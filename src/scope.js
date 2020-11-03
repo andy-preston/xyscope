@@ -107,7 +107,7 @@ module.exports = (buf, scl) => {
         'validateLimits': (limitStr) => {
             const limits = limitStr.split(',');
             if (limits.length != 4 || limits.some(isNaN)) {
-                console.log(
+                console.warn(
                     limits,
                     'limits should be 4 numerics separated by commas'
                 );
