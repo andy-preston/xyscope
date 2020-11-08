@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# BE CAREFUL - this scrubs you whole system's Docker files
+# docker system prune --volumes -a
+
+[ -n "$0" ] && appName=$0 || appName="xyscope-dev"
+
+case $1 in
+'run')
+    docker run -it --rm --network="host" \
+        --user $(id -u):$(id -g) --volume $(pwd):/usr/local/src \
+        --name running-$appName $appName
+    ;;
+'shell')
+    docker container exec -it running-$appName bash
+    ;;
+'build')
+    docker build -t $appName ./docker
+    ;;
+*)
+    echo "./docker/container [run|shell|build] app-name"
+    ;;
+esac
+

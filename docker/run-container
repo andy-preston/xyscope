@@ -1,5 +1,0 @@
-#!/bin/bash
-
-docker run -it --rm --network="host" \
-    --user $(id -u):$(id -g) --volume $(pwd):/usr/local/src \
-    --name running-xyscope-dev xyscope-dev

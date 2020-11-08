@@ -1,3 +1,0 @@
-#!/bin/bash
-
-docker container exec -it running-xyscope-dev bash
