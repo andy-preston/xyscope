@@ -27,7 +27,7 @@ export const Scope = (buf, scl, col) => {
     /**
      * @constant {object} buffer object constructed by ./buffer.js or a mock
      */
-    const buffer = typeof buf == 'undefined' ? Buffer(600) : buf;
+    const buffer = typeof buf == 'undefined' ? Buffer(100) : buf;
 
     /**
      * @constant {object} scaler object constructed by ./scaler.js or a mock
@@ -59,19 +59,16 @@ export const Scope = (buf, scl, col) => {
                 scaler.scale(canvas, ctx);
                 colour.start(
                     window.getComputedStyle(canvas),
-                    buffer.size
+                    buffer.size()
                 );
-                ctx.beginPath();
-                buffer.forEach((idx, element) => {
-                    ctx.strokeStyle = '#fff';
-                    console.log(colour.style());
-                    if (idx == 0) {
-                        ctx.moveTo(element.x, element.y);
-                    } else {
-                        ctx.lineTo(element.x, element.y);
-                    }
+                buffer.forEach((idx, element, prev) => {
+                    ctx.strokeStyle = colour.style();
+                    console.log(idx, element, prev)
+                    ctx.beginPath();
+                    ctx.moveTo(prev.x, prev.y);
+                    ctx.lineTo(element.x, element.y);
+                    ctx.stroke();
                 });
-                ctx.stroke();
                 canvas.dispatchEvent(requestDataEvent);
             }
         );

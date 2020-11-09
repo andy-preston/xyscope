@@ -6,10 +6,10 @@ import { fromString, fromRgba } from 'css-color-converter';
  */
 export const Colour = () => {
     /** @member {Array} nextColour an RGBA array of the next colour */
-    var nextColour;
+    var next;
 
-    /** @member {Array} increments separate increments for each step */
-    var increments;
+    /** @member {number} increment increment for each step */
+    var increment;
 
     /** @member {number} step current step round */
     var step;
@@ -23,23 +23,10 @@ export const Colour = () => {
          * @param {number} steps integer number of steps
          */
         'start': (style, steps) => {
-            const foregroundColour = fromString(
-                style.getPropertyValue('color')
-            ).toRgbaArray();
-            nextColour = fromString(
-                style.getPropertyValue('background-color')
-            ).toRgbaArray();
+            next = fromString(style.getPropertyValue('color')).toRgbaArray();
+            next[3] = 0;
             step = 0;
-            increments = nextColour.map(
-                /**
-                 * @param {number} bgComp the background colour component
-                 * @param {number} idx the index of the bg, fg and inc. array
-                 * @returns {number} component of increments array
-                 */
-                (bgComp, idx) => {
-                    return (foregroundColour[idx] - bgComp) / (steps - 1);
-                }
-            );
+            increment = 1 / steps;
         },
 
         /**
@@ -49,19 +36,10 @@ export const Colour = () => {
          */
         'style': () => {
             if (step > 0) {
-                nextColour = nextColour.map(
-                    /**
-                     * @param {number} comp the background colour component
-                     * @param {number} idx the index of the bg, fg and inc. array
-                     * @returns {number} component of increments array
-                     */
-                    (comp, idx) => {
-                        return comp + increments[idx];
-                    }
-                );
+                next[3] = next[3] + increment;
             }
             step = step + 1;
-            return fromRgba(nextColour).toRgbString();
+            return fromRgba(next).toRgbString();
         }
     };
 };

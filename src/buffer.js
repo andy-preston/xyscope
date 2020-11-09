@@ -66,8 +66,8 @@ export const Buffer = (size) => {
          * @param {Function} callback function with (idx, item) params
          */
         'forEach': (callback) => {
-            for (let idx = 0; idx < size; idx++) {
-                callback(idx, getElement(idx));
+            for (let idx = size - 1; idx > 0; idx--) {
+                callback(idx - 1, getElement(idx - 1), getElement(idx));
             }
         },
 

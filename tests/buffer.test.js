@@ -25,7 +25,8 @@ test('pushed element is always first, followed by others in push order', () => {
     const buffer = Buffer(5);
     for (let item = 1; item <= 10; item++) {
         buffer.push({ 'x': item, 'y': item });
-        buffer.forEach((idx, actual) => {
+        // eslint-disable-next-line no-unused-vars
+        buffer.forEach((idx, actual, prev) => {
             let expected = item - idx;
             if (expected < 0) {
                 expected = 0;
