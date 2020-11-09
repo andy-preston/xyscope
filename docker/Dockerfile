@@ -24,6 +24,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* && \
     echo "#!/bin/bash" > /usr/local/bin/contstart && \
     echo "yarn install" >> /usr/local/bin/contstart && \
+    echo "yarn build"  >> /usr/local/bin/contstart && \
     echo "exec bash" >> /usr/local/bin/contstart
 
 WORKDIR /usr/local/src
