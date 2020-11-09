@@ -2,30 +2,32 @@
 
 import { Scaler } from '../src/scaler.js';
 
+const canvas = { 'width': 400, 'height': 300 };
+
 test('scales correctly with positive coordinates', () => {
     const scaler = Scaler();
     scaler.setLimits(0, 0, 20, 10);
-    expect(scaler.scale(5, 'x', 20)).toBe(5);
-    expect(scaler.scale(5, 'x', 40)).toBe(10);
-    expect(scaler.scale(5, 'y', 10)).toBe(5);
-    expect(scaler.scale(5, 'y', 40)).toBe(20);
+    expect(scaler.getScale(canvas)).toEqual([20, -30]);
+    expect(scaler.getOffsets()).toEqual([0, -10]);
 });
 
 test('scales correctly with negative coordinates', () => {
     const scaler = Scaler();
     scaler.setLimits(-20, -10, 0, 0);
-    expect(scaler.scale(-15, 'x', 20)).toBe(5);
-    expect(scaler.scale(-15, 'x', 40)).toBe(10);
-    expect(scaler.scale(-5, 'y', 10)).toBe(5);
-    expect(scaler.scale(-5, 'y', 40)).toBe(20);
+    expect(scaler.getScale(canvas)).toEqual([20, -30]);
+    expect(scaler.getOffsets()).toEqual([20, 0]);
 });
 
 test('scales correctly with mixed coordinates', () => {
     const scaler = Scaler();
     scaler.setLimits(-10, -5, 10, 5);
-    expect(scaler.scale(5, 'x', 20)).toBe(15);
-    expect(scaler.scale(5, 'x', 40)).toBe(30);
-    expect(Math.abs(scaler.scale(5, 'y', 10))).toBe(0);
-    expect(scaler.scale(0, 'y', 40)).toBe(20);
+    expect(scaler.getScale(canvas)).toEqual([20, -30]);
+    expect(scaler.getOffsets()).toEqual([10, -5]);
 });
 
+test('scales correctly with a different scale to the other tests', () => {
+    const scaler = Scaler();
+    scaler.setLimits(-10, -5, 30, 25);
+    expect(scaler.getScale(canvas)).toEqual([10, -10]);
+    expect(scaler.getOffsets()).toEqual([10, -25]);
+});

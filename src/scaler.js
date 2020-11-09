@@ -8,29 +8,29 @@
  * @returns {object} an initialised scaler object
  */
 export const Scaler = () => {
-    /**
-     * A pair of limits for each axis
-     * Each limit will be an object with members 'size' and 'offset'
-     *
-     * @constant {object} limits
-     */
-    const limits = {
-        'x': undefined,
-        'y': undefined
+    var xSize, xOffset, ySize, yOffset;
+
+    const getScale = (canvas) => {
+        return [canvas.width / xSize, canvas.height / ySize];
+    };
+
+    const getOffsets = () => {
+        return [xOffset, yOffset];
     };
 
     return {
+        // These two are only exported to help with testing.
+        'getScale': getScale,
+        'getOffsets': getOffsets,
+
         /**
          * @function scale rescale the canvas before drawing
          * @param {object} canvas the canvas we're scaling
          * @param {object} ctx the rendering context we're using
          */
         'scale': (canvas, ctx) => {
-            ctx.scale(
-                canvas.width / limits.x.size,
-                canvas.height / limits.y.size
-            );
-            ctx.translate(limits.x.offset, limits.y.offset);
+            ctx.scale(...getScale(canvas));
+            ctx.translate(...getOffsets());
             // TODO: lineWidth should be dynamically calculated based on scale
             ctx.lineWidth = 0.4;
         },
@@ -43,13 +43,12 @@ export const Scaler = () => {
          * @param {number} yMax the maximum point of the y axis
          */
         'setLimits': (xMin, yMin, xMax, yMax) => {
-            const setLimit = (min, max) => {
-                return { 'size': max - min, 'offset': 0 - min };
-            };
-
-            limits.x = setLimit(xMin, xMax);
+            xSize = xMax - xMin;
+            xOffset = 0 - xMin;
             // reversed y-axis to get a more "mathematically normal" view.
-            limits.y = setLimit(yMax, yMin);
+            ySize = yMin - yMax;
+            yOffset = 0 - yMax;
         }
+
     };
 }
