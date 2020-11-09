@@ -23,7 +23,7 @@ test("can't request an item beyond end of buffer", () => {
 
 test('pushed element is always first, followed by others in push order', () => {
     const buffer = Buffer(5);
-    for (let item = 1; item <= 10; item++) {
+    for (let item = 1; item <= 20; item++) {
         buffer.push({ 'x': item, 'y': item });
         // eslint-disable-next-line no-unused-vars
         buffer.forEach((idx, actual, prev) => {
