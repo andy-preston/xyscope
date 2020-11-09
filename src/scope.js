@@ -63,7 +63,6 @@ export const Scope = (buf, scl, col) => {
                 );
                 buffer.forEach((idx, element, prev) => {
                     ctx.strokeStyle = colour.style();
-                    console.log(idx, element, prev)
                     ctx.beginPath();
                     ctx.moveTo(prev.x, prev.y);
                     ctx.lineTo(element.x, element.y);
