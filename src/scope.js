@@ -27,7 +27,7 @@ export const Scope = (buf, scl, col) => {
     /**
      * @constant {object} buffer object constructed by ./buffer.js or a mock
      */
-    const buffer = typeof buf == 'undefined' ? Buffer(100) : buf;
+    const buffer = typeof buf == 'undefined' ? Buffer(200) : buf;
 
     /**
      * @constant {object} scaler object constructed by ./scaler.js or a mock
