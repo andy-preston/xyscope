@@ -5,6 +5,7 @@
     "author": "Andy Preston",
     "private": true,
     "license": "The Unlicense",
+    "main": "./src/vue-xyscope.js",
     "dependencies": {
         "css-color-converter": "^2.0.0"
     },
