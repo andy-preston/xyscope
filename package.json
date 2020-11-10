@@ -1,4 +1,10 @@
 {
+    "name": "xyscope",
+    "description": "X-Y Mock Oscilloscope",
+    "version": "1.0.0",
+    "author": "Andy Preston",
+    "private": true,
+    "license": "The Unlicense",
     "dependencies": {
         "css-color-converter": "^2.0.0"
     },
@@ -14,8 +20,6 @@
         "webpack": "^5.3.2",
         "webpack-cli": "^4.1.0"
     },
-    "license": "The Unlicense",
-    "private": true,
     "babel": {
         "presets": [
             [
