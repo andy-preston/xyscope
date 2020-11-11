@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Scope from './scope.js';
+import { Scope } from './scope.js';
 
 const scope = Scope();
 
