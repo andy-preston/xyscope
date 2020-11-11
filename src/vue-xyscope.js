@@ -1,6 +1,5 @@
-/* global Vue */
-
-import { Scope } from './scope.js';
+import Vue from 'vue';
+import Scope from './scope.js';
 
 const scope = Scope();
 
