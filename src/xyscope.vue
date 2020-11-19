@@ -1,9 +1,18 @@
-import Vue from 'vue';
-import { Scope } from './scope.js';
+<template>
+    <div class="xyscope">
+        <canvas
+            id="canvas"
+            @request-data="$emit('request-data')"
+        >
+        </canvas>
+    </div>
+</template>
 
+<script>
+import { Scope } from './scope.js';
 const scope = Scope();
 
-Vue.component('xyscope', {
+export default {
     'props': {
         /**
          * @member {string} limits "xMin, yMin, xMax, yMax"
@@ -43,9 +52,13 @@ Vue.component('xyscope', {
          * @function rescale force the scope to rescale itself
          */
         'rescale': scope.rescale
-    },
-    'template': '<div class="xyscope">' +
-        '<canvas id="canvas" style="width: 100%; height: 100%"' +
-        " v-on:request-data=\"$emit('request-data')\"> " +
-        '</canvas></div>'
-});
+    }
+}
+</script>
+
+<style>
+#canvas {
+    width: 100%;
+    height: 100%;
+}
+</style>
