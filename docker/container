@@ -7,8 +7,11 @@
 
 case $1 in
 'run')
-    docker run -it --rm --network="host" \
-        --user $(id -u):$(id -g) --volume $(pwd):/usr/local/src \
+    docker run \
+        --rm \
+        --interactive --tty \
+        --user $(id -u):$(id -g) \
+        --volume $(pwd):/usr/local/src \
         --name running-$appName $appName
     ;;
 'shell')
