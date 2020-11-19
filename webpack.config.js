@@ -1,4 +1,4 @@
-/* global __dirname */
+/* eslint-env node */
 
 const path = require('path');
 
@@ -7,7 +7,7 @@ module.exports = {
     'mode': 'development',
     'output': {
         'filename': 'vue-xyscope.js',
-        'path': path.resolve(__dirname, 'build'),
+        'path': path.resolve(__dirname, 'build')
     },
     'module': {
         'rules': [{

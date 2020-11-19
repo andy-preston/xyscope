@@ -16,6 +16,7 @@
         "babel-loader": "^8.1.0",
         "eslint": "^7.12.1",
         "eslint-plugin-jsdoc": "^30.7.6",
+        "eslint-plugin-vue": "^7.1.0",
         "jest": "^26.6.2",
         "vue": "^2.6.12",
         "webpack": "^5.3.2",
@@ -36,7 +37,8 @@
     "eslintConfig": {
         "extends": [
             "plugin:jsdoc/recommended",
-            "eslint:recommended"
+            "eslint:recommended",
+            "plugin:vue/recommended"
         ],
         "parserOptions": {
             "ecmaVersion": 6,
@@ -49,9 +51,37 @@
         },
         "plugins": [
             "jsdoc"
-        ]
+        ],
+        "rules": {
+            "comma-dangle": [
+                "error",
+                "never"
+            ],
+            "operator-linebreak": [
+                "error",
+                "after"
+            ],
+            "vue/html-indent": [
+                "error",
+                4
+            ],
+            "vue/html-self-closing": [
+                "error",
+                {
+                    "html": {
+                        "void": "never",
+                        "normal": "never",
+                        "component": "never"
+                    },
+                    "svg": "never",
+                    "math": "never"
+                }
+            ]
+        }
+    },
     },
     "scripts": {
-        "build": "yarn eslint src tests example && yarn jest && yarn webpack"
+        "lint": "yarn eslint *.js tests/*.js src/*",
+        "build": "yarn lint && yarn jest && yarn webpack"
     }
 }
