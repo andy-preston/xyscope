@@ -19,6 +19,7 @@
         "eslint-plugin-vue": "^7.1.0",
         "jest": "^26.6.2",
         "vue": "^2.6.12",
+        "vue-jest": "^3.0.7",
         "webpack": "^5.3.2",
         "webpack-cli": "^4.1.0"
     },
@@ -79,6 +80,17 @@
             ]
         }
     },
+    "jest": {
+        "verbose": true,
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "vue"
+        ],
+        "transform": {
+            ".*\\.(vue)$": "vue-jest",
+            "^.+\\.js$": "babel-jest"
+        }
     },
     "scripts": {
         "lint": "yarn eslint *.js tests/*.js src/*",
