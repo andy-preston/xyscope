@@ -32,7 +32,7 @@ export const Scaler = () => {
             ctx.scale(...getScale(canvas));
             ctx.translate(...getOffsets());
             // TODO: lineWidth should be dynamically calculated based on scale
-            ctx.lineWidth = 0.4;
+            ctx.lineWidth = 0.2;
         },
 
         /**

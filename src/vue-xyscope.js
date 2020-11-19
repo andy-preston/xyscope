@@ -38,7 +38,12 @@ Vue.component('xyscope', {
          * @function pushData
          * @param {object} data the x,y pair (``{'x': 23, 'y': 42}``)
          */
-        'pushData': scope.pushData
+        'pushData': scope.pushData,
+
+        /**
+         * @function rescale force the scope to rescale itself
+         */
+        'rescale': scope.rescale
     },
     'template': '<div class="xyscope">' +
         '<canvas id="canvas" style="width: 100%; height: 100%"' +

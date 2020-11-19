@@ -40,9 +40,17 @@ export const Scope = (buf, scl, col) => {
     const colour = typeof col == 'undefined' ? Colour() : col;
 
     /**
-     * @constant requestDataEvent event to request data
+     * @constant {object} requestDataEvent event to request data
      */
     const requestDataEvent = new Event('request-data');
+
+    /**
+     * @constant {Function} rescale dynamically resize the canvas
+     */
+    const rescale = () => {
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+    }
 
     /**
      * @function requestRepaint request that browser updates canvas next repaint
@@ -81,8 +89,14 @@ export const Scope = (buf, scl, col) => {
         'start': (htmlCanvas) => {
             canvas = htmlCanvas;
             ctx = canvas.getContext('2d');
+            rescale();
             requestRepaint();
         },
+
+        /**
+         * @function rescale dynamically rescale the canvas
+         */
+        'rescale': rescale,
 
         /**
          * @function setLimits call this before `start` to set up axes
