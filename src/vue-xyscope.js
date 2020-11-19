@@ -3,7 +3,6 @@ import { Scope } from './scope.js';
 
 const scope = Scope();
 
-// eslint-disable-next-line vue/component-definition-name-casing
 Vue.component('xyscope', {
     'props': {
         /**
