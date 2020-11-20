@@ -1,7 +1,8 @@
 <template>
     <div class="xyscope">
         <canvas
-            id="canvas"
+            ref="canvas"
+            class="xyscope-canvas"
             @request-data="$emit('request-data')"
         >
         </canvas>
@@ -32,8 +33,8 @@ export default {
             }
         }
     },
-    'mounted': () => {
-        scope.start(document.getElementById('canvas'));
+    'mounted': function () {
+        scope.start(this.$refs.canvas);
     },
     'methods': {
         /**
@@ -56,8 +57,10 @@ export default {
 }
 </script>
 
+<!-- no style in webpack :( -->
+
 <style>
-#canvas {
+.xyscope-canvas {
     width: 100%;
     height: 100%;
 }
