@@ -1,10 +1,6 @@
 FROM ubuntu:bionic
-
 ENV TERM=linux
-
 ENV DEBIAN_FRONTEND=noninteractive
-
-ENV HOME=/usr/local/src
 
 RUN apt-get update && \
     apt-get -y --no-install-recommends install gnupg curl ca-certificates && \
