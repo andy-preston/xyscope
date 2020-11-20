@@ -37,9 +37,10 @@ export default {
 
 <style>
 html,
-body {
-    width: 100%;
+body,
+#example {
     height: 100%;
+    margin: 0;
 }
 
 .xyscope-canvas {

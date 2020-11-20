@@ -57,11 +57,16 @@ export default {
 }
 </script>
 
-<!-- no style in webpack :( -->
-
 <style>
-.xyscope-canvas {
-    width: 100%;
+.xyscope {
+    display: flex;
+    flex-direction: row;
     height: 100%;
+}
+
+.xyscope-canvas {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
 }
 </style>
