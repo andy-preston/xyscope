@@ -1,9 +1,7 @@
-.bash_history
-.node_repl_history
 .yarnrc
 yarn.lock
 .vscode
 .cache
 node_modules
-build/*
-!build/.gitkeep
+example/build/*
+!example/build/.gitkeep
